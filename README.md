@@ -1,32 +1,45 @@
-# React + TypeScript + Vite
+# Think Board
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A simple note app made with React. This is my mini project for the Quera front-end bootcamp.
 
-Currently, two official plugins are available:
+You can:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- See all notes
+- Create a new note
+- Open a note and see its details
+- Edit a note
+- Delete a note (it asks you first)
+- Search and sort notes
+- Switch between light and dark theme
 
-## React Compiler
+## Tools
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React + TypeScript
+- Vite
+- Tailwind CSS + daisyUI
+- React Query + Axios
+- React Router
 
-## Expanding the Oxlint configuration
+## How to run
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install
+npm run dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+Then open the link that shows in the terminal.
+
+## Folders
+
+```
+src/
+  pages/            one file for each page
+  features/notes/   everything about notes (API, hooks, components)
+  components/       shared parts (navbar, dialog, ...)
+  hooks/            small reusable hooks
+  lib/              axios and React Query setup
+```
+
+## Backend
+
+The app uses this API: `https://thinkboard.codewithmmd.ir/api/notes`
