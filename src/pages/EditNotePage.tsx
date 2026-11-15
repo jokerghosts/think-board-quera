@@ -34,6 +34,7 @@ export function EditNotePage() {
               initialValues={{ title: note.title, content: note.content }}
               submitLabel="Save changes"
               isSubmitting={updateNote.isPending}
+              submitError={updateNote.error}
               onCancel={() => navigate(detailPath)}
               onSubmit={(values) => updateNote.mutate(values, { onSuccess: () => navigate(detailPath) })}
             />

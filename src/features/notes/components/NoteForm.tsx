@@ -1,4 +1,5 @@
-import { useState, type FormEvent } from 'react'
+import { useEffect, useState, type FormEvent } from 'react'
+import { getNoteFieldErrors } from '../hooks'
 import type { NoteInput } from '../types'
 
 const TITLE_MAX_LENGTH = 100
@@ -7,6 +8,8 @@ interface NoteFormProps {
   initialValues?: NoteInput
   submitLabel: string
   isSubmitting: boolean
+  /** The error of the last submit, if the server rejected it (e.g. a title that is too long). */
+  submitError?: unknown
   onSubmit: (values: NoteInput) => void
   onCancel: () => void
 }
@@ -26,11 +29,18 @@ export function NoteForm({
   initialValues = { title: '', content: '' },
   submitLabel,
   isSubmitting,
+  submitError,
   onSubmit,
   onCancel,
 }: NoteFormProps) {
   const [values, setValues] = useState<NoteInput>(initialValues)
   const [errors, setErrors] = useState<FormErrors>({})
+
+  // When the server rejects a field, show its message under the matching input.
+  useEffect(() => {
+    const serverErrors = getNoteFieldErrors(submitError)
+    if (serverErrors) setErrors((prev) => ({ ...prev, ...serverErrors }))
+  }, [submitError])
 
   function handleChange(field: keyof NoteInput, value: string) {
     setValues((prev) => ({ ...prev, [field]: value }))

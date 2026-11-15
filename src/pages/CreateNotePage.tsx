@@ -19,6 +19,7 @@ export function CreateNotePage() {
           <NoteForm
             submitLabel="Create note"
             isSubmitting={createNote.isPending}
+            submitError={createNote.error}
             onCancel={() => navigate('/')}
             onSubmit={(values) => createNote.mutate(values, { onSuccess: () => navigate('/') })}
           />

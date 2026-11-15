@@ -1,8 +1,20 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
-import { getErrorMessage } from '../../lib/api-client'
+import { getErrorMessage, getFieldErrors } from '../../lib/api-client'
 import { notesApi } from './api'
 import type { Note, NoteInput } from './types'
+
+const NOTE_FIELDS = ['title', 'content'] as const
+
+/** Field errors for a rejected note body, shown under the inputs by the form. */
+export function getNoteFieldErrors(error: unknown) {
+  return getFieldErrors(error, NOTE_FIELDS, 'title', 'Title is too long. Please make it shorter.')
+}
+
+// Validation errors are shown under the inputs, so only toast the other errors.
+function toastUnlessFieldError(error: unknown) {
+  if (!getNoteFieldErrors(error)) toast.error(getErrorMessage(error))
+}
 
 /**
  * One place for every cache key of this feature, so reading and
@@ -33,7 +45,7 @@ export function useCreateNote() {
       toast.success('Note created')
       return queryClient.invalidateQueries({ queryKey: noteKeys.all })
     },
-    onError: (error) => toast.error(getErrorMessage(error)),
+    onError: toastUnlessFieldError,
   })
 }
 
@@ -46,7 +58,7 @@ export function useUpdateNote(id: string) {
       queryClient.setQueryData(noteKeys.detail(id), updated)
       return queryClient.invalidateQueries({ queryKey: noteKeys.all })
     },
-    onError: (error) => toast.error(getErrorMessage(error)),
+    onError: toastUnlessFieldError,
   })
 }
 
