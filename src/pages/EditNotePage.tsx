@@ -1,7 +1,7 @@
 import { Link, useNavigate, useParams } from 'react-router'
 import { ErrorState } from '../components/ErrorState'
 import { NoteForm } from '../features/notes/components/NoteForm'
-import { NoteDetailSkeleton } from '../features/notes/components/NoteSkeletons'
+import { NoteFormSkeleton } from '../features/notes/components/NoteSkeletons'
 import { useNote, useUpdateNote } from '../features/notes/hooks'
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { getErrorMessage } from '../lib/api-client'
@@ -21,7 +21,7 @@ export function EditNotePage() {
       </Link>
 
       {isPending ? (
-        <NoteDetailSkeleton />
+        <NoteFormSkeleton />
       ) : isError ? (
         <ErrorState title="Could not load this note" message={getErrorMessage(error)} onRetry={() => refetch()} />
       ) : (

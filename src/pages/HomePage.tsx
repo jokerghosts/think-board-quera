@@ -44,9 +44,7 @@ export function HomePage() {
 
   function renderContent() {
     if (isPending) {
-      return (
-        <NoteListSkeleton />
-      )
+      return <NoteListSkeleton />
     }
 
     if (isError) {
@@ -99,6 +97,12 @@ export function HomePage() {
       <div className="flex items-end justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold sm:text-3xl">My notes</h1>
+          {/* While loading, keep the space of the notes count so the page does not jump. */}
+          {isPending && (
+            <p className="text-sm" aria-hidden="true">
+              <span className="skeleton inline-block h-[0.8em] w-16 align-middle" />
+            </p>
+          )}
           {notes && notes.length > 0 && (
             <p className="text-sm text-base-content/60">
               {visibleNotes.length === notes.length
