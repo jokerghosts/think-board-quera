@@ -8,3 +8,15 @@ body,
 #root {
   min-height: 100%;
 }
+
+/* forest uses pill-shaped buttons and inputs, emerald does not.
+   Give both themes the same corner radius so the UI looks the same in dark and light mode. */
+@plugin 'daisyui/theme' {
+  name: 'forest';
+  default: true;
+  --radius-field: 0.5rem;
+}
+@plugin 'daisyui/theme' {
+  name: 'emerald';
+  --radius-field: 0.5rem;
+}
