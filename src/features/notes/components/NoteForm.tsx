@@ -83,7 +83,7 @@ export function NoteForm({
         <legend className="fieldset-legend">Content</legend>
         <textarea
           dir="auto"
-          className={`textarea h-48 w-full ${errors.content ? 'textarea-error' : ''}`}
+          className={`textarea h-48 w-full resize-none ${errors.content ? 'textarea-error' : ''}`}
           placeholder="Write your note here..."
           value={values.content}
           onChange={(event) => handleChange('content', event.target.value)}
