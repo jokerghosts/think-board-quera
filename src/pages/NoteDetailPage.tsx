@@ -33,7 +33,7 @@ export function NoteDetailPage() {
                 {note.title}
               </h1>
               <div className="flex shrink-0 gap-2">
-                <Link to={`/notes/${note.id}/edit`} className="btn btn-primary btn-sm">
+                <Link to={`/notes/${note.id}/edit`} className="btn btn-primary btn-sm flex-1 sm:flex-none">
                   <Icon name="pencil" />
                   Edit
                 </Link>
@@ -41,6 +41,7 @@ export function NoteDetailPage() {
                   noteId={note.id}
                   noteTitle={note.title}
                   variant="soft"
+                  className="flex-1 sm:flex-none"
                   onDeleted={() => navigate('/', { replace: true })}
                 />
               </div>

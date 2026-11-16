@@ -23,13 +23,13 @@ export function NoteCard({ note }: NoteCardProps) {
         <p className="line-clamp-3 whitespace-pre-line break-words text-sm leading-relaxed text-base-content/70" dir="auto">
           {note.content}
         </p>
-        <div className="card-actions mt-auto items-center justify-between border-t border-base-300 pt-3">
+        <div className="card-actions mt-auto flex-wrap items-center justify-between gap-y-2 border-t border-base-300 pt-3">
           <time dateTime={note.createdAt} className="flex items-center gap-1.5 text-xs text-base-content/60">
             <Icon name="calendar" className="size-3.5" />
             {formatDate(note.createdAt)}
           </time>
           {/* `relative z-10` keeps the buttons clickable above the card's stretched link. */}
-          <div className="relative z-10 flex gap-1">
+          <div className="relative z-10 ms-auto flex gap-1">
             <Link to={`/notes/${note.id}/edit`} className="btn btn-ghost btn-sm">
               <Icon name="pencil" />
               Edit

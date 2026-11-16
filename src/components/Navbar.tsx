@@ -16,9 +16,10 @@ export function Navbar() {
         </Link>
         <div className="flex items-center gap-1 sm:gap-2">
           <ThemeToggle />
-          <Link to="/notes/new" className="btn btn-primary btn-sm sm:btn-md">
+          <Link to="/notes/new" className="btn btn-primary btn-sm max-[359px]:btn-square sm:btn-md">
             <Icon name="plus" />
-            <span>New note</span>
+            {/* On very small phones only the + icon is shown; screen readers still read the text. */}
+            <span className="max-[359px]:sr-only">New note</span>
           </Link>
         </div>
       </nav>
