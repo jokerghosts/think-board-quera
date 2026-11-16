@@ -29,7 +29,7 @@ export function NoteDetailPage() {
         <article className="card border border-base-300 bg-base-100 shadow-sm">
           <div className="card-body gap-4">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-              <h1 className="text-2xl font-bold break-words sm:text-3xl" dir="auto">
+              <h1 className="text-2xl font-bold wrap-anywhere sm:text-3xl" dir="auto">
                 {note.title}
               </h1>
               <div className="flex shrink-0 gap-2">
@@ -61,8 +61,8 @@ export function NoteDetailPage() {
               )}
             </div>
             <div className="border-t border-base-300" />
-            <p className="leading-relaxed whitespace-pre-line break-words" dir="auto">
-              {note.content}
+            <p className="leading-relaxed whitespace-pre-line wrap-anywhere" dir="auto">
+              {note.content.trim()}
             </p>
           </div>
         </article>

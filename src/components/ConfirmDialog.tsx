@@ -43,7 +43,7 @@ export function ConfirmDialog({
           </span>
           <div>
             <h3 className="text-lg font-bold">{title}</h3>
-            <p className="pt-1 text-base-content/70" dir="auto">
+            <p className="pt-1 text-base-content/70 wrap-anywhere" dir="auto">
               {message}
             </p>
           </div>

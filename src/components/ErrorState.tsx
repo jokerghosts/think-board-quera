@@ -13,7 +13,7 @@ export function ErrorState({ title = 'Something went wrong', message, onRetry }:
         <Icon name="alert" className="size-7" />
       </span>
       <h2 className="text-xl font-semibold">{title}</h2>
-      <p className="max-w-md text-base-content/70">{message}</p>
+      <p className="max-w-md text-base-content/70 wrap-anywhere">{message}</p>
       {onRetry && (
         <button type="button" className="btn btn-primary btn-soft mt-2" onClick={onRetry}>
           Try again

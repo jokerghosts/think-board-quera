@@ -86,7 +86,7 @@ export function HomePage() {
     return (
       <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {visibleNotes.map((note) => (
-          <li key={note.id} className="relative">
+          <li key={note.id} className="relative min-w-0">
             <NoteCard note={note} />
           </li>
         ))}

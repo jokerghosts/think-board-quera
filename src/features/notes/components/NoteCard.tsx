@@ -4,13 +4,18 @@ import { formatDate } from '../../../utils/format-date'
 import type { Note } from '../types'
 import { DeleteNoteButton } from './DeleteNoteButton'
 
+/** Text for the short preview: no empty lines at the start or end, and no blank lines in between. */
+function getPreview(content: string) {
+  return content.trim().replace(/\n\s*\n+/g, '\n')
+}
+
 interface NoteCardProps {
   note: Note
 }
 
 export function NoteCard({ note }: NoteCardProps) {
   return (
-    <article className="group card h-full border border-base-300 bg-base-100 shadow-sm transition-[translate,box-shadow,border-color] duration-200 hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-md">
+    <article className="group card h-full min-w-0 border border-base-300 bg-base-100 shadow-sm transition-[translate,box-shadow,border-color] duration-200 hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-md">
       <div className="card-body gap-3">
         <h2 className="card-title line-clamp-1 break-all text-lg" dir="auto">
           <Link
@@ -20,8 +25,8 @@ export function NoteCard({ note }: NoteCardProps) {
             {note.title}
           </Link>
         </h2>
-        <p className="line-clamp-3 whitespace-pre-line break-words text-sm leading-relaxed text-base-content/70" dir="auto">
-          {note.content}
+        <p className="line-clamp-3 whitespace-pre-line wrap-anywhere text-sm leading-relaxed text-base-content/70" dir="auto">
+          {getPreview(note.content)}
         </p>
         <div className="card-actions mt-auto flex-wrap items-center justify-between gap-y-2 border-t border-base-300 pt-3">
           <time dateTime={note.createdAt} className="flex items-center gap-1.5 text-xs text-base-content/60">
