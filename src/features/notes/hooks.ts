@@ -56,6 +56,10 @@ export function useUpdateNote(id: string) {
     onSuccess: (updated: Note) => {
       toast.success('Note updated')
       queryClient.setQueryData(noteKeys.detail(id), updated)
+      // Replace the note inside the cached list, so its card changes right where it is.
+      queryClient.setQueryData<Note[]>(noteKeys.all, (notes) =>
+        notes?.map((note) => (note.id === id ? { ...note, ...updated } : note)),
+      )
       return queryClient.invalidateQueries({ queryKey: noteKeys.all })
     },
     onError: toastUnlessFieldError,

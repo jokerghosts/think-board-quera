@@ -11,6 +11,8 @@ interface NoteFormProps {
   isSubmitting: boolean
   /** The error of the last submit, if the server rejected it (e.g. a title that is too long). */
   submitError?: unknown
+  /** A smaller version of the form, used when a note is edited inside its card. */
+  compact?: boolean
   onSubmit: (values: NoteInput) => void
   onCancel: () => void
 }
@@ -36,6 +38,7 @@ export function NoteForm({
   submitLabel,
   isSubmitting,
   submitError,
+  compact = false,
   onSubmit,
   onCancel,
 }: NoteFormProps) {
@@ -67,7 +70,7 @@ export function NoteForm({
   const titleLength = values.title.trim().length
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
+    <form onSubmit={handleSubmit} noValidate className={`flex flex-col ${compact ? 'gap-2' : 'gap-4'}`}>
       <fieldset className="fieldset">
         <legend className="fieldset-legend">Title</legend>
         <input
@@ -92,7 +95,7 @@ export function NoteForm({
         <legend className="fieldset-legend">Content</legend>
         <textarea
           dir="auto"
-          className={`textarea h-48 w-full resize-none ${errors.content ? 'textarea-error' : ''}`}
+          className={`textarea ${compact ? 'h-28' : 'h-48'} w-full resize-none ${errors.content ? 'textarea-error' : ''}`}
           placeholder="Write your note here..."
           value={values.content}
           onChange={(event) => handleChange('content', event.target.value)}
@@ -101,11 +104,11 @@ export function NoteForm({
         <span className="text-error">{errors.content}</span>
       </fieldset>
 
-      <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
-        <button type="button" className="btn btn-ghost" onClick={onCancel} disabled={isSubmitting}>
+      <div className={compact ? 'flex justify-end gap-2' : 'flex flex-col-reverse gap-2 sm:flex-row sm:justify-end'}>
+        <button type="button" className={`btn btn-ghost ${compact ? 'btn-sm' : ''}`} onClick={onCancel} disabled={isSubmitting}>
           Cancel
         </button>
-        <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
+        <button type="submit" className={`btn btn-primary ${compact ? 'btn-sm' : ''}`} disabled={isSubmitting}>
           {isSubmitting && <span className="loading loading-spinner loading-sm" />}
           {submitLabel}
         </button>
