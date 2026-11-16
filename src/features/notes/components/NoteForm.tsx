@@ -2,7 +2,8 @@ import { useEffect, useState, type FormEvent } from 'react'
 import { getNoteFieldErrors } from '../hooks'
 import type { NoteInput } from '../types'
 
-const TITLE_MAX_LENGTH = 100
+// The server rejects longer titles (checked against the real API: 50 characters is the longest it accepts).
+export const TITLE_MAX_LENGTH = 50
 
 interface NoteFormProps {
   initialValues?: NoteInput
@@ -19,10 +20,15 @@ type FormErrors = Partial<Record<keyof NoteInput, string>>
 function validate(values: NoteInput): FormErrors {
   const errors: FormErrors = {}
   if (!values.title.trim()) errors.title = 'Title is required.'
-  else if (values.title.trim().length > TITLE_MAX_LENGTH)
-    errors.title = `Title must be at most ${TITLE_MAX_LENGTH} characters.`
+  else errors.title = getTitleLengthError(values.title)
   if (!values.content.trim()) errors.content = 'Content is required.'
   return errors
+}
+
+function getTitleLengthError(title: string) {
+  const extra = title.trim().length - TITLE_MAX_LENGTH
+  if (extra <= 0) return undefined
+  return `Title is too long. Remove ${extra} character${extra === 1 ? '' : 's'}.`
 }
 
 export function NoteForm({
@@ -44,17 +50,21 @@ export function NoteForm({
 
   function handleChange(field: keyof NoteInput, value: string) {
     setValues((prev) => ({ ...prev, [field]: value }))
-    // Clear the error of a field as soon as the user starts fixing it.
-    if (errors[field]) setErrors((prev) => ({ ...prev, [field]: undefined }))
+    // The title length is checked on every key press, so the user sees the problem right away.
+    // Other errors are cleared as soon as the user starts fixing them.
+    const liveError = field === 'title' ? getTitleLengthError(value) : undefined
+    if (errors[field] || liveError) setErrors((prev) => ({ ...prev, [field]: liveError }))
   }
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const nextErrors = validate(values)
     setErrors(nextErrors)
-    if (Object.keys(nextErrors).length > 0) return
+    if (Object.values(nextErrors).some(Boolean)) return
     onSubmit({ title: values.title.trim(), content: values.content.trim() })
   }
+
+  const titleLength = values.title.trim().length
 
   return (
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
@@ -66,15 +76,14 @@ export function NoteForm({
           className={`input w-full ${errors.title ? 'input-error' : ''}`}
           placeholder="Note title"
           value={values.title}
-          maxLength={TITLE_MAX_LENGTH + 20}
           onChange={(event) => handleChange('title', event.target.value)}
           aria-invalid={Boolean(errors.title)}
           autoFocus
         />
         <div className="flex justify-between">
           <span className="text-error">{errors.title}</span>
-          <span className="text-base-content/50">
-            {values.title.trim().length}/{TITLE_MAX_LENGTH}
+          <span className={titleLength > TITLE_MAX_LENGTH ? 'font-medium text-error' : 'text-base-content/50'}>
+            {titleLength}/{TITLE_MAX_LENGTH}
           </span>
         </div>
       </fieldset>
