@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { Icon } from './Icon'
 
 interface ConfirmDialogProps {
   open: boolean
@@ -35,9 +36,18 @@ export function ConfirmDialog({
 
   return (
     <dialog ref={dialogRef} className="modal modal-bottom sm:modal-middle" onClose={onClose}>
-      <div className="modal-box">
-        <h3 className="text-lg font-bold">{title}</h3>
-        <p className="py-4 text-base-content/70">{message}</p>
+      <div className="modal-box border border-base-300">
+        <div className="flex gap-4">
+          <span className="grid size-11 shrink-0 place-items-center rounded-full bg-error/10 text-error">
+            <Icon name="trash" className="size-5" />
+          </span>
+          <div>
+            <h3 className="text-lg font-bold">{title}</h3>
+            <p className="pt-1 text-base-content/70" dir="auto">
+              {message}
+            </p>
+          </div>
+        </div>
         <div className="modal-action">
           <button type="button" className="btn btn-ghost" onClick={onClose} disabled={isConfirming}>
             Cancel

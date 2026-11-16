@@ -1,4 +1,5 @@
 import { Link } from 'react-router'
+import { Icon } from '../../../components/Icon'
 import { formatDate } from '../../../utils/format-date'
 import type { Note } from '../types'
 import { DeleteNoteButton } from './DeleteNoteButton'
@@ -9,23 +10,28 @@ interface NoteCardProps {
 
 export function NoteCard({ note }: NoteCardProps) {
   return (
-    <article className="card h-full border-t-4 border-primary bg-base-100 shadow-sm transition-[translate,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-lg">
+    <article className="group card h-full border border-base-300 bg-base-100 shadow-sm transition-[translate,box-shadow,border-color] duration-200 hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-md">
       <div className="card-body gap-3">
-        <h2 className="card-title line-clamp-1 break-all" dir="auto">
-          <Link to={`/notes/${note.id}`} className="after:absolute after:inset-0">
+        <h2 className="card-title line-clamp-1 break-all text-lg" dir="auto">
+          <Link
+            to={`/notes/${note.id}`}
+            className="transition-colors after:absolute after:inset-0 group-hover:text-primary"
+          >
             {note.title}
           </Link>
         </h2>
-        <p className="line-clamp-3 whitespace-pre-line break-words text-base-content/70" dir="auto">
+        <p className="line-clamp-3 whitespace-pre-line break-words text-sm leading-relaxed text-base-content/70" dir="auto">
           {note.content}
         </p>
-        <div className="card-actions mt-auto items-center justify-between pt-2">
-          <time dateTime={note.createdAt} className="text-sm text-base-content/60">
+        <div className="card-actions mt-auto items-center justify-between border-t border-base-300 pt-3">
+          <time dateTime={note.createdAt} className="flex items-center gap-1.5 text-xs text-base-content/60">
+            <Icon name="calendar" className="size-3.5" />
             {formatDate(note.createdAt)}
           </time>
           {/* `relative z-10` keeps the buttons clickable above the card's stretched link. */}
-          <div className="relative z-10 flex gap-2">
+          <div className="relative z-10 flex gap-1">
             <Link to={`/notes/${note.id}/edit`} className="btn btn-ghost btn-sm">
+              <Icon name="pencil" />
               Edit
             </Link>
             <DeleteNoteButton noteId={note.id} noteTitle={note.title} />

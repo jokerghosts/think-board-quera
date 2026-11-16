@@ -1,5 +1,6 @@
 import { Link, useNavigate, useParams } from 'react-router'
 import { ErrorState } from '../components/ErrorState'
+import { Icon } from '../components/Icon'
 import { NoteForm } from '../features/notes/components/NoteForm'
 import { NoteFormSkeleton } from '../features/notes/components/NoteSkeletons'
 import { useNote, useUpdateNote } from '../features/notes/hooks'
@@ -16,8 +17,9 @@ export function EditNotePage() {
 
   return (
     <div className="mx-auto max-w-2xl">
-      <Link to={detailPath} className="btn btn-ghost btn-sm mb-4">
-        ← Back to note
+      <Link to={detailPath} className="btn btn-ghost btn-sm mb-4 -ms-3 text-base-content/70 hover:text-base-content">
+        <Icon name="arrowLeft" />
+        Back to note
       </Link>
 
       {isPending ? (
@@ -25,7 +27,7 @@ export function EditNotePage() {
       ) : isError ? (
         <ErrorState title="Could not load this note" message={getErrorMessage(error)} onRetry={() => refetch()} />
       ) : (
-        <div className="card bg-base-100 shadow-sm">
+        <div className="card border border-base-300 bg-base-100 shadow-sm">
           <div className="card-body">
             <h1 className="card-title text-2xl">Edit note</h1>
             <NoteForm

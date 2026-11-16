@@ -1,4 +1,5 @@
 import { Link, useNavigate } from 'react-router'
+import { Icon } from '../components/Icon'
 import { NoteForm } from '../features/notes/components/NoteForm'
 import { useCreateNote } from '../features/notes/hooks'
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
@@ -10,10 +11,11 @@ export function CreateNotePage() {
 
   return (
     <div className="mx-auto max-w-2xl">
-      <Link to="/" className="btn btn-ghost btn-sm mb-4">
-        ← Back to notes
+      <Link to="/" className="btn btn-ghost btn-sm mb-4 -ms-3 text-base-content/70 hover:text-base-content">
+        <Icon name="arrowLeft" />
+        Back to notes
       </Link>
-      <div className="card bg-base-100 shadow-sm">
+      <div className="card border border-base-300 bg-base-100 shadow-sm">
         <div className="card-body">
           <h1 className="card-title text-2xl">Create a new note</h1>
           <NoteForm
