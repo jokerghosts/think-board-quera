@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 
-export type Theme = 'forest' | 'emerald'
+export type Theme = 'thinkboard-dark' | 'thinkboard-light'
 
 const STORAGE_KEY = 'think-board-theme'
-const DARK: Theme = 'forest'
-const LIGHT: Theme = 'emerald'
+const DARK: Theme = 'thinkboard-dark'
+const LIGHT: Theme = 'thinkboard-light'
 
 function getInitialTheme(): Theme {
   try {

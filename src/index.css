@@ -1,22 +1,83 @@
 @import 'tailwindcss';
 @plugin 'daisyui' {
-  themes: forest --default, emerald;
+  themes: false;
+}
+
+/*
+  Two themes made for this app. Both use the same green as the main color,
+  the same corners and the same borders, so dark and light mode feel like one design.
+  Colors are written in oklch(lightness chroma hue), which makes it easy to keep the same hue (160 = green).
+*/
+@plugin 'daisyui/theme' {
+  name: 'thinkboard-dark';
+  default: true;
+  prefersdark: true;
+  color-scheme: dark;
+  --color-base-100: oklch(23% 0.012 160);
+  --color-base-200: oklch(18.5% 0.01 160);
+  --color-base-300: oklch(30% 0.014 160);
+  --color-base-content: oklch(93% 0.01 160);
+  --color-primary: oklch(74% 0.16 155);
+  --color-primary-content: oklch(20% 0.05 155);
+  --color-secondary: oklch(72% 0.11 195);
+  --color-secondary-content: oklch(20% 0.04 195);
+  --color-accent: oklch(80% 0.13 85);
+  --color-accent-content: oklch(22% 0.05 85);
+  --color-neutral: oklch(30% 0.014 160);
+  --color-neutral-content: oklch(90% 0.01 160);
+  --color-info: oklch(72% 0.13 240);
+  --color-info-content: oklch(20% 0.05 240);
+  --color-success: oklch(74% 0.16 155);
+  --color-success-content: oklch(20% 0.05 155);
+  --color-warning: oklch(80% 0.15 80);
+  --color-warning-content: oklch(22% 0.05 80);
+  --color-error: oklch(70% 0.18 22);
+  --color-error-content: oklch(20% 0.05 22);
+  --radius-selector: 1rem;
+  --radius-field: 0.5rem;
+  --radius-box: 1rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 1;
+  --noise: 0;
+}
+
+@plugin 'daisyui/theme' {
+  name: 'thinkboard-light';
+  color-scheme: light;
+  --color-base-100: oklch(100% 0 0);
+  --color-base-200: oklch(97% 0.006 160);
+  --color-base-300: oklch(91% 0.01 160);
+  --color-base-content: oklch(26% 0.02 160);
+  --color-primary: oklch(56% 0.15 155);
+  --color-primary-content: oklch(99% 0.01 155);
+  --color-secondary: oklch(55% 0.11 195);
+  --color-secondary-content: oklch(99% 0.01 195);
+  --color-accent: oklch(70% 0.15 70);
+  --color-accent-content: oklch(22% 0.05 70);
+  --color-neutral: oklch(30% 0.02 160);
+  --color-neutral-content: oklch(97% 0.006 160);
+  --color-info: oklch(56% 0.15 240);
+  --color-info-content: oklch(99% 0.01 240);
+  --color-success: oklch(56% 0.15 155);
+  --color-success-content: oklch(99% 0.01 155);
+  --color-warning: oklch(72% 0.16 70);
+  --color-warning-content: oklch(22% 0.05 70);
+  --color-error: oklch(58% 0.2 25);
+  --color-error-content: oklch(99% 0.01 25);
+  --radius-selector: 1rem;
+  --radius-field: 0.5rem;
+  --radius-box: 1rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 1;
+  --noise: 0;
 }
 
 html,
 body,
 #root {
   min-height: 100%;
-}
-
-/* forest uses pill-shaped buttons and inputs, emerald does not.
-   Give both themes the same corner radius so the UI looks the same in dark and light mode. */
-@plugin 'daisyui/theme' {
-  name: 'forest';
-  default: true;
-  --radius-field: 0.5rem;
-}
-@plugin 'daisyui/theme' {
-  name: 'emerald';
-  --radius-field: 0.5rem;
 }
