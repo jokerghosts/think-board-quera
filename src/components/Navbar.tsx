@@ -1,4 +1,5 @@
 import { Link } from 'react-router'
+import { Icon } from './Icon'
 import { ThemeToggle } from './ThemeToggle'
 
 export function Navbar() {
@@ -11,7 +12,7 @@ export function Navbar() {
         <div className="flex items-center gap-1 sm:gap-2">
           <ThemeToggle />
           <Link to="/notes/new" className="btn btn-primary btn-sm sm:btn-md">
-            <span aria-hidden="true" className="text-lg leading-none">+</span>
+            <Icon name="plus" />
             <span>New note</span>
           </Link>
         </div>

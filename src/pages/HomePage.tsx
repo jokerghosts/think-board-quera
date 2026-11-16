@@ -2,6 +2,7 @@ import { useDeferredValue, useMemo } from 'react'
 import { Link, useSearchParams } from 'react-router'
 import { EmptyState } from '../components/EmptyState'
 import { ErrorState } from '../components/ErrorState'
+import { Icon } from '../components/Icon'
 import { NoteCard } from '../features/notes/components/NoteCard'
 import { NoteListSkeleton } from '../features/notes/components/NoteSkeletons'
 import { NotesToolbar } from '../features/notes/components/NotesToolbar'
@@ -54,11 +55,12 @@ export function HomePage() {
     if (notes.length === 0) {
       return (
         <EmptyState
-          icon="📝"
+          icon="note"
           title="No notes yet"
           description="Ready to organize your thoughts? Create your first note to get started."
           action={
             <Link to="/notes/new" className="btn btn-primary">
+              <Icon name="plus" />
               Create your first note
             </Link>
           }
@@ -69,7 +71,7 @@ export function HomePage() {
     if (visibleNotes.length === 0) {
       return (
         <EmptyState
-          icon="🔍"
+          icon="search"
           title="No matching notes"
           description={`Nothing matches "${deferredSearch.trim()}". Try another word.`}
           action={

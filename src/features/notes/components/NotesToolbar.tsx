@@ -1,3 +1,4 @@
+import { Icon } from '../../../components/Icon'
 import { SORT_OPTIONS, isSortOption, type SortOption } from '../utils'
 
 interface NotesToolbarProps {
@@ -11,10 +12,7 @@ export function NotesToolbar({ search, sort, onSearchChange, onSortChange }: Not
   return (
     <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
       <label className="input w-full sm:flex-1">
-        <svg aria-hidden="true" className="h-4 w-4 opacity-60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <circle cx="11" cy="11" r="7" />
-          <path d="m20 20-3.5-3.5" />
-        </svg>
+        <Icon name="search" className="size-4 opacity-60" />
         <input
           type="search"
           dir="auto"

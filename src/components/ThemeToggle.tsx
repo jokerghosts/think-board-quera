@@ -1,4 +1,5 @@
 import { useTheme } from '../hooks/useTheme'
+import { Icon } from './Icon'
 
 export function ThemeToggle() {
   const { isDark, toggleTheme } = useTheme()
@@ -11,8 +12,9 @@ export function ThemeToggle() {
       aria-label={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
       title={isDark ? 'Light theme' : 'Dark theme'}
     >
-      <span aria-hidden="true" className="text-xl transition-transform duration-300 hover:rotate-12">
-        {isDark ? '☀️' : '🌙'}
+      {/* `key` restarts the small spin animation every time the icon changes. */}
+      <span key={String(isDark)} className="motion-safe:animate-[spin_0.4s_ease-out]">
+        <Icon name={isDark ? 'sun' : 'moon'} className="size-5" />
       </span>
     </button>
   )
