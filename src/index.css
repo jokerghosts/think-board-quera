@@ -102,3 +102,13 @@ body,
 .select:is(:focus, :focus-within) {
   --input-color: color-mix(in oklab, var(--color-base-content) 35%, transparent);
 }
+
+/* iPhones zoom into any input with text smaller than 16px when it gets focus, so phones get 16px text. */
+@media (width < 40rem) {
+  .input,
+  .input input,
+  .textarea,
+  .select {
+    font-size: 1rem;
+  }
+}

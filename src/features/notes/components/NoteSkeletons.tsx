@@ -14,7 +14,7 @@ function TextLine({ className = '' }: { className?: string }) {
 /** A grey block with the exact size of a button with the same icon and label (both are made invisible). */
 function ButtonSkeleton({ label, icon, className = '' }: { label: string; icon?: IconName; className?: string }) {
   return (
-    <span className={`btn skeleton pointer-events-none rounded-field border-transparent text-transparent shadow-none ${className}`}>
+    <span className={`btn skeleton pointer-events-none rounded-field border-transparent text-transparent shadow-none [text-shadow:none] ${className}`}>
       {icon && <Icon name={icon} />}
       {label}
     </span>
@@ -34,11 +34,11 @@ export function NoteCardSkeleton() {
           <TextLine className="w-5/6" />
           <TextLine className="w-2/3" />
         </div>
-        <div className="card-actions mt-auto items-center justify-between border-t border-base-300 pt-3">
+        <div className="card-actions mt-auto flex-wrap items-center justify-between gap-y-2 border-t border-base-300 pt-3">
           <div className="text-xs">
             <TextLine className="w-24" />
           </div>
-          <div className="flex gap-1">
+          <div className="ms-auto flex gap-1">
             <ButtonSkeleton label="Edit" icon="pencil" className="btn-sm" />
             <ButtonSkeleton label="Delete" icon="trash" className="btn-sm" />
           </div>
@@ -69,8 +69,8 @@ export function NoteDetailSkeleton() {
             <TextLine className="w-2/3" />
           </div>
           <div className="flex shrink-0 gap-2">
-            <ButtonSkeleton label="Edit" icon="pencil" className="btn-sm" />
-            <ButtonSkeleton label="Delete" icon="trash" className="btn-sm" />
+            <ButtonSkeleton label="Edit" icon="pencil" className="btn-sm flex-1 sm:flex-none" />
+            <ButtonSkeleton label="Delete" icon="trash" className="btn-sm flex-1 sm:flex-none" />
           </div>
         </div>
         <div className="text-sm">
