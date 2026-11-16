@@ -81,3 +81,24 @@ body,
 #root {
   min-height: 100%;
 }
+
+/*
+  Focused inputs: daisyUI draws an outline 2px outside the border, which looks like a second border.
+  Instead, keep one border and tint the background a little (lighter in dark mode, darker in light mode).
+*/
+.input:focus,
+.input:focus-within,
+.textarea:focus,
+.select:focus,
+.select:focus-within {
+  outline: none;
+  box-shadow: none;
+  background-color: color-mix(in oklab, var(--color-base-content) 9%, var(--color-base-100));
+}
+
+/* A softer border while focused (red error borders stay red). */
+.input:not(.input-error):is(:focus, :focus-within),
+.textarea:not(.textarea-error):focus,
+.select:is(:focus, :focus-within) {
+  --input-color: color-mix(in oklab, var(--color-base-content) 35%, transparent);
+}
